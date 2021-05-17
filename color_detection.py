@@ -16,8 +16,9 @@ def get_color(r, g, b):
     min = (r - colors.iloc[0][3]) + (g - colors.iloc[0][4]) + (b - colors.iloc[0][5])
     display_color = colors.iloc[0][0]
     for i, color in colors.iterrows():
-        if (min > ((r - color[3]) + (g - color[4]) + (b - color[5]))):
-            min = (r - color[3]) + (g - color[4]) + (b - color[5])
+        diff = abs(r - int(color[3])) + abs(g - int(color[4]))+ abs(b - int(color[5]))
+        if (min > diff):
+            min = diff
             display_color = color[0]
 
     return display_color
@@ -37,9 +38,13 @@ def mouse_click(event, x, y,
         # was clicked.
         r, g, b = image[x, y]
         color = get_color(r, g, b)
-        cv.putText(image, color, (x, y),
+        r = int(r)
+        g = int(g)
+        b = int(b)
+        cv.rectangle(image,(20,20), (750,60), (b,g,r), -1)
+        cv.putText(image, color, (50, 50),
                     font, 1,
-                    (255, 255, 0),
+                    (0, 0, 0),
                     2)
         cv.imshow('image', image)
 
