@@ -7,7 +7,7 @@ parser.add_argument('-i', '--image', required = True, help = 'Path to the image'
 args = vars(parser.parse_args())
 
 image = cv.imread(args['image'])
-print(image.shape)
+
 cv.imshow('image', image)
 
 colors = pd.read_csv('colors.csv')
@@ -29,39 +29,18 @@ def mouse_click(event, x, y,
     # to check if left mouse
     # button was clicked
     if event == cv.EVENT_LBUTTONDOWN:
-
-        # font for left click event
         font = cv.FONT_HERSHEY_TRIPLEX
-        LB = 'Left Button'
 
-        # display that left button
-        # was clicked.
         r, g, b = image[x, y]
         color = get_color(r, g, b)
         r = int(r)
         g = int(g)
         b = int(b)
-        cv.rectangle(image,(20,20), (750,60), (b,g,r), -1)
+        
+        cv.rectangle(image, (20, 20), (750, 60), (b, g, r), -1)
         cv.putText(image, color, (50, 50),
                     font, 1,
                     (0, 0, 0),
-                    2)
-        cv.imshow('image', image)
-
-
-    # to check if right mouse
-    # button was clicked
-    if event == cv.EVENT_RBUTTONDOWN:
-
-        # font for right click event
-        font = cv.FONT_HERSHEY_SCRIPT_SIMPLEX
-        RB = 'Right Button'
-
-        # display that right button
-        # was clicked.
-        cv.putText(image, RB, (x, y),
-                    font, 1,
-                    (0, 255, 255),
                     2)
         cv.imshow('image', image)
 
