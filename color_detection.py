@@ -7,7 +7,7 @@ parser.add_argument('-i', '--image', required = True, help = 'Path to the image'
 args = vars(parser.parse_args())
 
 image = cv.imread(args['image'])
-
+print(image.shape)
 cv.imshow('image', image)
 
 colors = pd.read_csv('colors.csv')
@@ -31,7 +31,7 @@ def mouse_click(event, x, y,
     if event == cv.EVENT_LBUTTONDOWN:
         font = cv.FONT_HERSHEY_TRIPLEX
 
-        r, g, b = image[x, y]
+        b, g, r = image[y, x]
         color = get_color(r, g, b)
         r = int(r)
         g = int(g)
